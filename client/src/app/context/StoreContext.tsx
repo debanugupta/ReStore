@@ -12,17 +12,17 @@ export const StoreContext = createContext<StoreContextValue | undefined>(undefin
 export function useStoreContext() {
     const context = useContext(StoreContext);
 
-    if (context === undefined){
-        throw Error('Oops - we do not seem to be inside provider');
+    if (context === undefined) {
+        throw Error('Oops - we do not seem to be inside the provider');
     }
 
     return context;
 }
 
-export function StoreProvider ({children}: PropsWithChildren<any>){
+export function StoreProvider({children}: PropsWithChildren<any>) {
     const [basket, setBasket] = useState<Basket | null>(null);
 
-    function removeItem(productId: number, quantity: number){
+    function removeItem(productId: number, quantity: number) {
         if (!basket) return;
         const items = [...basket.items];
         const itemIndex = items.findIndex(i => i.productId === productId);
@@ -32,13 +32,11 @@ export function StoreProvider ({children}: PropsWithChildren<any>){
             setBasket(prevState => {
                 return {...prevState!, items}
             })
-
         }
-
     }
 
     return (
-        <StoreContext.Provider value={{basket, setBasket, removeItem }}>
+        <StoreContext.Provider value={{basket, setBasket, removeItem}}>
             {children}
         </StoreContext.Provider>
     )
