@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     public class BuggyController : BaseApiController
     {
-
         [HttpGet("not-found")]
         public ActionResult GetNotFound()
         {
@@ -21,7 +17,7 @@ namespace API.Controllers
             return BadRequest(new ProblemDetails{Title = "This is a bad request"});
         }
 
-        [HttpGet("unauthrised")]
+        [HttpGet("unauthorised")]
         public ActionResult GetUnauthorised()
         {
             return Unauthorized();
@@ -38,8 +34,7 @@ namespace API.Controllers
         [HttpGet("server-error")]
         public ActionResult GetServerError()
         {
-            throw new Exception("This is server errror");
+            throw new Exception("This is a server error");
         }
-        
     }
 }
